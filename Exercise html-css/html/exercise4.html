@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahie AI Form</title>
+</head>
+<body>
+<form action="/submit-community-event" method="POST">
+  
+  
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="fullname" required>
+
+  <br>
+
+  
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+  <br>
+
+  <div>
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" title="Fadlan geli email sax ah geli(e.g. example@domain.com)" required>
+  </div>
+  <br>
+
+  <fieldset>
+    <legend>Select T-Shirt Size</legend>
+    
+    <label for="size-s">
+      <input type="radio" id="size-s" name="tshirt_size" value="S" required> Small (S)
+    </label>
+    <br>
+
+    <label for="size-m">
+      <input type="radio" id="size-m" name="tshirt_size" value="M"> Medium (M)
+    </label>
+    <br>
+
+    <label for="size-l">
+      <input type="radio" id="size-l" name="tshirt_size" value="L"> Large (L)
+    </label>
+    <br>
+
+    <label for="size-xl">
+      <input type="radio" id="size-xl" name="tshirt_size" value="XL"> Extra Large (XL)
+    </label>
+  </fieldset>
+  <br>
+
+  <button type="submit">Register</button>
+
+</form>
+
+</body>
+</html>

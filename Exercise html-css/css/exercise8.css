@@ -1,0 +1,22 @@
+.quote{
+    font-style: italic;
+    background-color: aliceblue;
+    margin: 10px;
+    padding: 15px;
+}
+
+#quote1{
+    border: 2px solid blue;
+}
+
+#quote2{
+    border: 2px dashed black;
+}
+
+#quote3{
+    border: 2px dotted green;
+}
+
+#quote4{
+    border: 2px double red;
+}

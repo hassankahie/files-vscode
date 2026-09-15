@@ -1,0 +1,13 @@
+p{
+    font-size: medium;
+    color: aqua;
+}
+
+.fav{
+    color: coral;
+}
+
+#character-name{
+    color: blueviolet;
+    font-size: larger;
+}

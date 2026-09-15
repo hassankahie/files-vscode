@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Security Alert</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #020202;
+      color: #ff1a1a;
+      font-family: "Courier New", monospace;
+      overflow: hidden;
+    }
+
+    /* =========================
+       START SCREEN
+    ========================= */
+
+    #startScreen {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, #250000 0%, #050000 45%, #000 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .start-box {
+      width: min(600px, 90%);
+      padding: 40px;
+      border: 2px solid #ff1111;
+      box-shadow:
+        0 0 20px #ff0000,
+        inset 0 0 20px rgba(255, 0, 0, 0.15);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .start-box h1 {
+      font-size: clamp(28px, 5vw, 55px);
+      margin-bottom: 15px;
+      animation: glow 1s infinite alternate;
+    }
+
+    .start-box p {
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    #startBtn {
+      border: 2px solid #ff0000;
+      background: #150000;
+      color: #ff3333;
+      padding: 16px 35px;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #startBtn:hover {
+      background: #ff0000;
+      color: white;
+      box-shadow: 0 0 30px red;
+    }
+
+    /* =========================
+       MAIN SCREEN
+    ========================= */
+
+    #main {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #020202;
+      overflow: hidden;
+    }
+
+    #main.active {
+      display: block;
+    }
+
+    .flash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      border: 12px solid red;
+      box-shadow: inset 0 0 80px red;
+      animation: flash 0.7s infinite;
+      z-index: 10;
+    }
+
+    @keyframes flash {
+      0%, 100% {
+        opacity: 0.25;
+      }
+
+      50% {
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px red;
+      }
+
+      to {
+        text-shadow:
+          0 0 10px red,
+          0 0 30px red;
+      }
+    }
+
+    /* =========================
+       MATRIX BACKGROUND
+    ========================= */
+
+    #matrix {
+      position: absolute;
+      inset: 0;
+      opacity: 0.13;
+      z-index: 0;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+      position: relative;
+      z-index: 5;
+      width: min(1200px, 92%);
+      height: 100vh;
+      margin: auto;
+      padding: 35px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      border: 2px solid red;
+      padding: 18px;
+      background: rgba(20, 0, 0, 0.8);
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+    }
+
+    .header h1 {
+      font-size: clamp(28px, 5vw, 60px);
+      animation: glow 0.8s infinite alternate;
+    }
+
+    .header p {
+      margin-top: 8px;
+      color: #ff7777;
+    }
+
+    .warning {
+      text-align: center;
+      color: white;
+      background: red;
+      padding: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      animation: warningBlink 0.4s infinite;
+    }
+
+    @keyframes warningBlink {
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 20px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .panel {
+      border: 1px solid #ff2222;
+      background: rgba(5, 0, 0, 0.9);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.15);
+      padding: 20px;
+      min-height: 0;
+    }
+
+    .panel h2 {
+      color: #ff3333;
+      margin-bottom: 15px;
+      font-size: 18px;
+      border-bottom: 1px solid #550000;
+      padding-bottom: 10px;
+    }
+
+    /* =========================
+       SCAN
+    ========================= */
+
+    .scan-status {
+      color: #ffaaaa;
+      margin-bottom: 15px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 25px;
+      border: 1px solid red;
+      background: #080000;
+      margin: 15px 0;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0%;
+      background: red;
+      box-shadow: 0 0 20px red;
+      transition: width 0.15s;
+    }
+
+    #percentage {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .danger-list {
+      margin-top: 20px;
+      line-height: 2;
+      color: #ff6666;
+    }
+
+    /* =========================
+       TERMINAL
+    ========================= */
+
+    #terminal {
+      height: 100%;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .terminal-line {
+      opacity: 0;
+      animation: terminalAppear 0.2s forwards;
+    }
+
+    @keyframes terminalAppear {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .red {
+      color: #ff2222;
+    }
+
+    .yellow {
+      color: #ffcc00;
+    }
+
+    .white {
+      color: #ddd;
+    }
+
+    .green {
+      color: #00ff66;
+    }
+
+    /* =========================
+       FINAL PRANK
+    ========================= */
+
+    #prank {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background:
+        radial-gradient(circle, #061b08, #000 70%);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #prank.show {
+      display: flex;
+    }
+
+    .prank-box {
+      border: 2px solid #00ff66;
+      padding: 45px;
+      max-width: 800px;
+      box-shadow: 0 0 40px rgba(0, 255, 100, 0.35);
+      background: rgba(0, 15, 5, 0.9);
+    }
+
+    .prank-box h1 {
+      color: #00ff66;
+      font-size: clamp(35px, 7vw, 75px);
+      margin-bottom: 20px;
+    }
+
+    .prank-box p {
+      color: #aaa;
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .safe {
+      color: #00ff66 !important;
+      font-weight: bold;
+    }
+
+    .esc {
+      margin-top: 25px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        overflow-y: auto;
+      }
+
+      .panel {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       START SCREEN
+  ========================= -->
+
+  <section id="startScreen">
+
+    <div class="start-box">
+
+      <h1>⚠ SYSTEM ALERT</h1>
+
+      <p>
+        Security simulation is ready.
+        <br />
+        Click below to start.
+      </p>
+
+      <button id="startBtn">
+        ⚡ START SIMULATION
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN SIMULATION
+  ========================= -->
+
+  <main id="main">
+
+    <canvas id="matrix"></canvas>
+
+    <div class="flash"></div>
+
+    <div class="content">
+
+      <header class="header">
+
+        <h1>⚠ CRITICAL SECURITY ALERT ⚠</h1>
+
+        <p>
+          UNAUTHORIZED ACCESS DETECTED
+        </p>
+
+      </header>
+
+
+      <div class="warning">
+        SYSTEM SECURITY BREACH DETECTED
+      </div>
+
+
+      <section class="grid">
+
+        <!-- LEFT -->
+
+        <div class="panel">
+
+          <h2>◉ SECURITY SCAN</h2>
+
+          <div class="scan-status">
+            Scanning system...
+          </div>
+
+          <div class="progress-container">
+            <div id="progress"></div>
+          </div>
+
+          <div id="percentage">
+            0%
+          </div>
+
+          <div class="danger-list">
+
+            <div>⚠ Network integrity: CHECKING</div>
+
+            <div>⚠ Firewall status: WARNING</div>
+
+            <div>⚠ Security protocols: CHECKING</div>
+
+            <div>⚠ System files: SCANNING</div>
+
+            <div>⚠ Encryption: CHECKING</div>
+
+          </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="panel">
+
+          <h2>◉ SYSTEM TERMINAL</h2>
+
+          <div id="terminal"></div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       PRANK REVEAL
+  ========================= -->
+
+  <section id="prank">
+
+    <div class="prank-box">
+
+      <h1>😂 GOT YOU!</h1>
+
+      <p>
+        This was only a prank / security simulation.
+      </p>
+
+      <p class="safe">
+        ✓ YOUR SYSTEM IS SAFE
+      </p>
+
+      <p>
+        Nothing was hacked.
+        <br />
+        No files were changed.
+      </p>
+
+      <div class="esc">
+        Press ESC to exit
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const startScreen = document.getElementById("startScreen");
+    const startBtn = document.getElementById("startBtn");
+
+    const main = document.getElementById("main");
+    const prank = document.getElementById("prank");
+
+    const progress = document.getElementById("progress");
+    const percentage = document.getElementById("percentage");
+
+    const terminal = document.getElementById("terminal");
+
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+
+    // ==========================================
+    // AUDIO
+    // ==========================================
+
+    let audioContext;
+    let sirenOscillator;
+    let sirenGain;
+    let sirenTimer;
+
+
+    function startSiren() {
+
+      audioContext =
+        new (window.AudioContext || window.webkitAudioContext)();
+
+      sirenOscillator =
+        audioContext.createOscillator();
+
+      sirenGain =
+        audioContext.createGain();
+
+      sirenOscillator.type = "sawtooth";
+
+      sirenOscillator.connect(sirenGain);
+
+      sirenGain.connect(audioContext.destination);
+
+      sirenGain.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+      );
+
+      sirenOscillator.start();
+
+      sirenTimer = setInterval(() => {
+
+        const now = audioContext.currentTime;
+
+        sirenOscillator.frequency.cancelScheduledValues(now);
+
+        sirenOscillator.frequency.setValueAtTime(
+          700,
+          now
+        );
+
+        sirenOscillator.frequency.linearRampToValueAtTime(
+          1400,
+          now + 0.6
+        );
+
+        sirenOscillator.frequency.linearRampToValueAtTime(
+          700,
+          now + 1.2
+        );
+
+        sirenGain.gain.cancelScheduledValues(now);
+
+        sirenGain.gain.setValueAtTime(
+          0.0001,
+          now
+        );
+
+        sirenGain.gain.linearRampToValueAtTime(
+          0.13,
+          now + 0.15
+        );
+
+        sirenGain.gain.linearRampToValueAtTime(
+          0.0001,
+          now + 1.2
+        );
+
+      }, 1200);
+
+    }
+
+
+    function stopSiren() {
+
+      if (sirenTimer) {
+        clearInterval(sirenTimer);
+      }
+
+      if (sirenOscillator) {
+
+        try {
+          sirenOscillator.stop();
+        } catch (e) {}
+
+      }
+
+      if (audioContext) {
+        audioContext.close();
+      }
+
+    }
+
+
+    // ==========================================
+    // MATRIX EFFECT
+    // ==========================================
+
+    function resizeCanvas() {
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+    }
+
+    resizeCanvas();
+
+    window.addEventListener(
+      "resize",
+      resizeCanvas
+    );
+
+
+    const chars =
+      "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
+
+    const fontSize = 14;
+
+    let columns =
+      Math.floor(canvas.width / fontSize);
+
+    let drops =
+      Array(columns).fill(1);
+
+
+    function drawMatrix() {
+
+      ctx.fillStyle =
+        "rgba(0, 0, 0, 0.08)";
+
+      ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      ctx.fillStyle =
+        "#ff0000";
+
+      ctx.font =
+        fontSize + "px monospace";
+
+
+      for (let i = 0; i < drops.length; i++) {
+
+        const text =
+          chars[Math.floor(
+            Math.random() * chars.length
+          )];
+
+        ctx.fillText(
+          text,
+          i * fontSize,
+          drops[i] * fontSize
+        );
+
+        if (
+          drops[i] * fontSize >
+            canvas.height &&
+          Math.random() > 0.975
+        ) {
+
+          drops[i] = 0;
+
+        }
+
+        drops[i]++;
+
+      }
+
+      requestAnimationFrame(drawMatrix);
+
+    }
+
+    drawMatrix();
+
+
+    // ==========================================
+    // TERMINAL LOGS
+    // ==========================================
+
+    const logs = [
+
+      ["red", "[ALERT] Unauthorized connection detected..."],
+
+      ["yellow", "[WARNING] Security protocol triggered"],
+
+      ["white", "Initializing emergency security scan..."],
+
+      ["white", "Scanning network interfaces..."],
+
+      ["red", ">> Suspicious activity detected"],
+
+      ["white", "Analyzing system processes..."],
+
+      ["yellow", ">> Checking firewall configuration"],
+
+      ["white", "Searching active connections..."],
+
+      ["red", ">> Anomaly detected"],
+
+      ["white", "Verifying system integrity..."],
+
+      ["yellow", ">> Encryption verification running"],
+
+      ["white", "Analyzing security permissions..."],
+
+      ["red", ">> HIGH RISK ACTIVITY DETECTED"],
+
+      ["white", "Attempting security lockdown..."],
+
+      ["yellow", ">> Lockdown protocol initialized"],
+
+      ["white", "Final security verification..."],
+
+      ["red", ">> CRITICAL ALERT"],
+
+      ["white", "System security scan continuing..."]
+
+    ];
+
+
+    let logIndex = 0;
+
+
+    function addLog() {
+
+      if (logIndex >= logs.length) {
+        return;
+      }
+
+      const [type, text] =
+        logs[logIndex];
+
+      const line =
+        document.createElement("div");
+
+      line.className =
+        "terminal-line " + type;
+
+      line.textContent =
+        "> " + text;
+
+      terminal.appendChild(line);
+
+      terminal.scrollTop =
+        terminal.scrollHeight;
+
+      logIndex++;
+
+    }
+
+
+    // ==========================================
+    // SECURITY SCAN
+    // ==========================================
+
+    let scanProgress = 0;
+
+
+    function runScan() {
+
+      const interval =
+        setInterval(() => {
+
+          scanProgress +=
+            Math.floor(Math.random() * 3) + 1;
+
+          if (scanProgress >= 100) {
+
+            scanProgress = 100;
+
+            clearInterval(interval);
+
+            progress.style.width =
+              "100%";
+
+            percentage.textContent =
+              "100%";
+
+            setTimeout(
+              revealPrank,
+              1200
+            );
+
+            return;
+
+          }
+
+          progress.style.width =
+            scanProgress + "%";
+
+          percentage.textContent =
+            scanProgress + "%";
+
+        }, 180);
+
+    }
+
+
+    // ==========================================
+    // START SIMULATION
+    // ==========================================
+
+    startBtn.addEventListener(
+      "click",
+      async () => {
+
+        startScreen.style.display =
+          "none";
+
+        main.classList.add("active");
+
+
+        // Browser allows audio after click
+        startSiren();
+
+
+        // Fullscreen
+        try {
+
+          if (
+            document.documentElement.requestFullscreen
+          ) {
+
+            await document.documentElement
+              .requestFullscreen();
+
+          }
+
+        } catch (error) {
+
+          console.log(
+            "Fullscreen unavailable"
+          );
+
+        }
+
+
+        // Start logs
+        const logInterval =
+          setInterval(() => {
+
+            addLog();
+
+            if (
+              logIndex >= logs.length
+            ) {
+
+              clearInterval(
+                logInterval
+              );
+
+            }
+
+          }, 650);
+
+
+        runScan();
+
+      }
+    );
+
+
+    // ==========================================
+    // PRANK REVEAL
+    // ==========================================
+
+    function revealPrank() {
+
+      stopSiren();
+
+      main.classList.remove(
+        "active"
+      );
+
+      prank.classList.add(
+        "show"
+      );
+
+      document.body.style.overflow =
+        "auto";
+
+    }
+
+
+    // ==========================================
+    // ESCAPE
+    // ==========================================
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (event.key === "Escape") {
+
+          stopSiren();
+
+          if (
+            document.fullscreenElement
+          ) {
+
+            document.exitFullscreen();
+
+          }
+
+          main.classList.remove(
+            "active"
+          );
+
+          prank.classList.remove(
+            "show"
+          );
+
+          startScreen.style.display =
+            "flex";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>

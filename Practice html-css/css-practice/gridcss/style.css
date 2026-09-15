@@ -1,0 +1,36 @@
+.container{
+    display: grid;
+    /* haddii aad rabto inay space wada qaato waxaan lagusoo dari karo waa ifr oo kan saddexaad ah  */
+
+    /* grid-template-columns: 1fr 2fr 1fr; */
+
+    /* marka rabto in lasoo celceliyo 1fr isticmaal value  */
+
+    grid-template-columns: repeat(4,1fr);
+
+    grid-template-rows: repeat(3, 1fr);
+    /* space ugu fiican lagu dari karo waa gap */
+    gap: 5px;
+    /* row-gap: 20px;
+    column-gap: 10px; */
+}
+.item{
+    background-color: antiquewhite;
+    padding: 20px;
+    /* margin: 10px; */
+}
+
+.item1{
+    grid-column: 1/ span 4;
+    
+}
+
+.item2{
+    grid-column: 2/ -1;
+}
+
+.item3{
+    grid-column: 2/ span 4;
+    grid-row: 2/ span 4;
+
+}

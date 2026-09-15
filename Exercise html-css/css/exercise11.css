@@ -1,0 +1,10 @@
+.feature-section{
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaTdlnT7liQ9JCskGPzxVXe_1DgfMYULssRbGf6UNJ4aaPq93Ral4yEpd5&s=10);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: rgb(249, 0, 0);
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+}

@@ -1,0 +1,17 @@
+.box{
+    background-color: rgb(61, 49, 193);
+    padding: 20px;
+    text-align: center;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px 50px;
+    gap: 20px;
+}
+
+.box1{
+    grid-column: 1/ span 2;
+    grid-row: 1 / span 2;
+}

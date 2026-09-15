@@ -1,0 +1,25 @@
+#div1{
+
+    background-color: lightblue;
+    display: block;
+   
+}
+
+#span1{
+    display: inline;
+    background-color: coral;
+}
+
+#div2{
+    
+    display: none;
+    background-color: bisque;
+}
+
+#span2{
+   display: block;
+    background-color: yellow;
+}
+
+
+

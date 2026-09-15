@@ -1,0 +1,38 @@
+.flex-nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ff00ff;
+}
+.nav-links{
+    display: flex;
+    list-style: none;
+}
+
+.nav-links a{
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    font-family: tahoma;
+    
+}
+
+.action-container button{
+    padding: 10px 20px;
+    background-color: blueviolet;
+    border: none;
+    cursor: pointer;
+}
+
+.action-container button:hover{
+    background-color: rgb(181, 114, 244);
+    color: aliceblue;
+}
+
+.hero{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

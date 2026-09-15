@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    width: 600px;
+}
+
+.item{
+    height: 50px;
+    border: 2px solid blue;
+    flex: 1;
+}
+
+#item-2{
+    flex: 2;
+}

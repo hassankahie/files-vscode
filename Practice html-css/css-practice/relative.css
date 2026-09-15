@@ -1,0 +1,11 @@
+.content-box{
+    border: 1px solid blue;
+    padding: 20px;
+    position: relative;
+}
+
+img{
+    position: relative;
+    width: 100px;
+    bottom: +20px;
+}

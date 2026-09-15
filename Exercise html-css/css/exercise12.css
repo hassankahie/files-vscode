@@ -1,0 +1,28 @@
+.profile-card{
+
+    position: relative;
+    bottom: -150px;
+    left: 150px;
+    width: 300px;
+    height: 200px;
+}
+
+.profile-image{
+
+    width: 100%;
+    height: auto;
+}
+
+.user-info{
+
+    position: absolute;
+    color: wheat;
+    top: 115%;
+    left: 70px;
+    font-family: Geneva;
+    line-height: 0.2;
+
+}
+
+
+

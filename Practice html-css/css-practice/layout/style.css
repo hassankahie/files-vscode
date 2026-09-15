@@ -1,0 +1,164 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    background-color: black;
+}
+.container{
+    width: 1110px;
+    margin: 0 auto;
+}
+.grid-container{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    
+}
+
+.grid-container div{
+    /* background-color: #ffa300; */
+    padding:10px;
+    color: white;
+}
+
+.blogs{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-column: 1/ span 3;
+}
+
+.blogs .blog img{
+    width: 100%;
+    height: 200px;
+}
+
+.blogs .blog blog-title{
+    font-weight: 500; 
+    line-height: 29px;
+    font-size: 22px;
+    cursor: pointer;
+    
+}
+.blogs .blog blog-title:hover{
+    color: #ffa300;
+  
+}
+
+.blogs .blog .badge-date{
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.blogs .blog .badge-date .badge{
+    font-weight: 700;
+    color: #230e00;
+    line-height: 11px;
+    font-size: 11px;
+    background-color: #bb7700;
+    padding: 2px 5px;
+    display: flex;
+      
+    
+}
+
+.blogs .blogs .badge-date .date{
+    color: #767676;
+    line-height: 11px;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+
+.ads .ad{
+    background-image: url("https://img.magnific.com/free-photo/attractive-enthusiastic-armenian-young-woman-curly-hair-pointing-looking-intrigued-left-show-index-fingers-awesome-blank-space-advertisement-smirking-joyfully-introducing-product-white-background_176420-35016.jpg?semt=ais_hybrid&w=740&q=80");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 347px;
+    height:297px ;
+}
+
+.instagram .user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.instagram .user .profile img{
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.instagram .user .profile .user-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.instagram .user .profile .user-info span:nth-child(1){
+    color: #ddd;
+    line-height: 26px;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+.instagram .user .profile .user-info span:nth-child(2){
+    color: #aaa;
+    line-height: 21px;
+    font-size: 12px;
+    font-weight: 700;
+
+}
+
+.follow-btn{
+    background-color: transparent;
+    color: #888;
+    line-height: 18px;
+    font-weight: 500;
+    border: 1px solid #444;
+    padding: 8px 15px;
+    cursor: pointer;
+
+}
+
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery img{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

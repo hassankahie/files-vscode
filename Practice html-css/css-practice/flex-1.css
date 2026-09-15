@@ -1,0 +1,15 @@
+.boxs{
+    display: flex;
+    height: 100vh;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.box{
+    padding: 20px;
+    background-color: blue;
+    margin: 20px;
+}

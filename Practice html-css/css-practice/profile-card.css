@@ -1,0 +1,18 @@
+.profile-card{
+    width: 500px;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRtnJV3eIoK703XyFNZaE0LulSDTSsZj79dWJDI1ztNA&s=10);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-card img{
+    width: 200px;
+    height: 200px;
+    border: 2px solid blue;
+    border-radius: 50%;
+}

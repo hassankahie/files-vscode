@@ -1,0 +1,32 @@
+.header{
+    background-color: blue;
+    color: white;
+}
+
+.about, .services{
+    background-color: lightgrey;
+    color: darkgray;
+}
+.service{
+    background-color: green;
+    color: white;
+}
+
+.testimonial-1{
+    background-color: brown;
+}
+.h2{
+    color: azure;
+}
+
+.testimonial-2{
+    background-color: green;
+}
+
+.two{
+    color: rgb(225, 221, 220);
+}
+.footer{
+    background-color: darkblue;
+    color: whitesmoke;
+}

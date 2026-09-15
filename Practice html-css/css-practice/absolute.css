@@ -1,0 +1,23 @@
+.promo-container{
+
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.promo-image{
+    width: 100%;
+    height: auto;
+
+}
+
+.promo-badge{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    color: white;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+

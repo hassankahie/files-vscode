@@ -1,0 +1,8 @@
+.image-background{
+    background-image: url(2pro.jpg);
+    height: 100vh;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

@@ -1,0 +1,26 @@
+.media-player{
+    display: flex;
+    width: 400px;
+    padding: 90px;
+    margin: 20px;
+    text-align: center;
+    
+}
+
+.control-button{
+    height: 50px;
+    border: 2px solid rgb(175, 175, 240);
+    flex: 1;
+}
+
+#prev{
+    background-color: beige;
+}
+#play{
+    background-color: crimson;
+    flex: 4;
+}
+#next{
+    background-color: beige;
+}
+

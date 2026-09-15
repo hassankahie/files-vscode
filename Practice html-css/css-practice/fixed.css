@@ -1,0 +1,16 @@
+.fixed-navbar{
+    position: fixed;
+    top: 0;
+    background-color: yellowgreen;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.fixed-navbar a{
+    text-decoration: none;
+    padding: 10px 20px;
+    color: rgb(239, 12, 12);
+
+}

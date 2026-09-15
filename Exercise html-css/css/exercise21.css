@@ -1,0 +1,19 @@
+.container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.article-card{
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.art-img{
+    width: 210px;
+    height: 140px;
+    object-fit: cover;
+}

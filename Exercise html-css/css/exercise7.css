@@ -1,0 +1,23 @@
+.text-block{
+    font-family: tahoma;
+    font-size: medium;
+    font-weight: 300;
+    font-style: normal;
+    color: white;
+    background-color: rgb(50, 50, 195);
+    margin: 20px;
+    text-align: center;
+    
+}
+
+#block1{
+    padding: 20px;
+}
+
+#block2{
+    padding: 30px;
+}
+
+#block3{
+    padding: 40px;
+}

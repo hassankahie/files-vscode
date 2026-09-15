@@ -1,0 +1,39 @@
+.navbar{
+    background-color: blue;
+    font-family: monospace;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 2px;
+    color: white;
+}
+
+.content-box{
+    font-family: tahoma;
+    font-size: medium;
+    margin: 20px;
+}
+
+#box1{
+    background-color: green;
+    color: white;
+    margin:40px;
+}
+
+#box2{
+    background-color: yellow;
+    color: black;
+    margin: 40px;
+}
+
+#box3{
+    background-color: blue;
+    color: white;
+    margin: 40px;
+}
+
+.footer{
+    background-color: darkgoldenrod;
+    margin-top: 3px;
+    font: 100;
+    font-family: 'Courier New', Courier, monospace;
+}
